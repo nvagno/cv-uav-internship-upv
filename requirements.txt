@@ -1,0 +1,8 @@
+pillow
+opencv-python
+matplotlib
+numpy
+pandas
+openpyxl
+torch
+https://github.com/Mickey2610/YOLO11s-UAV.git
