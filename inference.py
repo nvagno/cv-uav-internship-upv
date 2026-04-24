@@ -15,9 +15,17 @@ output_dir.mkdir(exist_ok=True)
 
 # Loop through images
 for img_path in input_dir.glob("*.*"):
+    if img_path.suffix.lower() not in [".png", ".jpg", ".jpeg"]:
+        continue
+
     results = model.predict(str(img_path))
 
     for r in results:
+        boxes = r.boxes
+        count = len(boxes) if boxes is not None else 0
+
+        print(f"{img_path.name}: {count} objects detected")
+
         im_array = r.plot()
         im = Image.fromarray(im_array)
 
