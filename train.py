@@ -1,17 +1,23 @@
 import sys
+from pathlib import Path
 
-sys.path.insert(0, "/home/vagno/Desktop/internship/ultralytics")
+pwd = Path.cwd()
+
+# Add Ultralytics path
+sys.path.insert(0, str(pwd / "ultralytics"))
 
 from ultralytics import YOLO
 
-#Load pre-trained model
+# Load model
 model = YOLO("YOLO11s-UAV.yml")
 
-#Train model
+# Train model
 results = model.train(
-    data='/home/vagno/Desktop/internship/datasets/dataset.yml',
-    epochs=10,
+    data=str(pwd / "datasets/dataset.yml"),
+    epochs=200,
     imgsz=640,
-    batch=16,
+    batch=15,
+    amp=False,
+    patience=50,
     device="cpu"
 )
