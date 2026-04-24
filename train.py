@@ -13,7 +13,7 @@ model = YOLO("YOLO11s-UAV.yml")
 
 # Train model
 results = model.train(
-    data=str(pwd / "datasets/dataset.yml"),
+    data=str("/kaggle/input/datasets/vagnonyhasina/citrus-dataset/datasets/dataset.yml"),
     epochs=200,
     imgsz=640,
     batch=15,
