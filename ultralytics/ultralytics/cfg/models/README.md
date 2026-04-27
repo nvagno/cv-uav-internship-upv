@@ -13,7 +13,7 @@ To get started, choose a `*.yaml` file (see the [YAML format](https://www.ultral
 Model configuration files (`*.yaml`) can be used directly from the [Command Line Interface (CLI)](https://docs.ultralytics.com/usage/cli/) via the `yolo` command:
 
 ```bash
-# Train a YOLO26n detection model using the coco8 dataset for 100 epochs
+# Train a YOLO26n detection model using the coco8 datasets for 100 epochs
 yolo task=detect mode=train model=yolo26n.yaml data=coco8.yaml epochs=100 imgsz=640
 ```
 
@@ -33,7 +33,7 @@ model = YOLO("yolo26n.yaml")
 # Display model information (architecture, layers, parameters, etc.)
 model.info()
 
-# Train the model using the COCO8 dataset (a small subset of COCO) for 100 epochs
+# Train the model using the COCO8 datasets (a small subset of COCO) for 100 epochs
 results = model.train(data="coco8.yaml", epochs=100, imgsz=640)
 
 # Run inference with the trained model on an image

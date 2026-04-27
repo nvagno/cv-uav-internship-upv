@@ -1,6 +1,6 @@
 # Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 """
-Train a model on a dataset.
+Train a model on a datasets.
 
 Usage:
     $ yolo mode=train model=yolo26n.pt data=coco8.yaml imgsz=640 epochs=100 batch=16
@@ -182,7 +182,7 @@ class BaseTrainer:
 
         # Model and Dataset
         self.model = check_model_file_from_stem(self.args.model)  # add suffix, i.e. yolo26n -> yolo26n.pt
-        with torch_distributed_zero_first(LOCAL_RANK):  # avoid auto-downloading dataset multiple times
+        with torch_distributed_zero_first(LOCAL_RANK):  # avoid auto-downloading datasets multiple times
             self.data = self.get_dataset()
 
         self.ema = None
@@ -271,7 +271,7 @@ class BaseTrainer:
         self.train_loader = self.get_dataloader(
             self.data["train"], batch_size=batch_size, rank=LOCAL_RANK, mode="train"
         )
-        # Note: When training DOTA dataset, double batch size could get OOM on images with >2000 objects.
+        # Note: When training DOTA datasets, double batch size could get OOM on images with >2000 objects.
         self.test_loader = self.get_dataloader(
             self.data.get("val") or self.data.get("test"),
             batch_size=batch_size if self.args.task == "obb" else batch_size * 2,
@@ -433,7 +433,7 @@ class BaseTrainer:
                         batch = self.preprocess_batch(batch)
                         if self.args.compile:
                             # Decouple inference and loss calculations for improved compile performance
-                            preds = self.model(batch["img"])
+                            preds = self.model(batch["images"])
                             loss, self.loss_items = unwrap_model(self.model).loss(batch, preds)
                         else:
                             loss, self.loss_items = self.model(batch)
@@ -488,7 +488,7 @@ class BaseTrainer:
                             f"{self._get_memory():.3g}G",  # (GB) GPU memory util
                             *(self.tloss if loss_length > 1 else torch.unsqueeze(self.tloss, 0)),  # losses
                             batch["cls"].shape[0],  # batch size, i.e. 8
-                            batch["img"].shape[-1],  # imgsz, i.e 640
+                            batch["images"].shape[-1],  # imgsz, i.e 640
                         )
                     )
                     self.run_callbacks("on_batch_end")
@@ -677,10 +677,10 @@ class BaseTrainer:
         """Get train and validation datasets from data dictionary.
 
         Returns:
-            (dict): A dictionary containing the training/validation/test dataset and category names.
+            (dict): A dictionary containing the training/validation/test datasets and category names.
         """
         try:
-            # Convert ul:// platform URIs and NDJSON files to local dataset format first
+            # Convert ul:// platform URIs and NDJSON files to local datasets format first
             data_str = str(self.args.data)
             if data_str.endswith(".ndjson") or (data_str.startswith("ul://") and "/datasets/" in data_str):
                 import asyncio
@@ -690,7 +690,7 @@ class BaseTrainer:
 
                 self.args.data = str(asyncio.run(convert_ndjson_to_yolo(check_file(self.args.data))))
 
-            # Task-specific dataset checking
+            # Task-specific datasets checking
             if self.args.task == "classify":
                 data = check_cls_dataset(self.args.data)
             elif str(self.args.data).rsplit(".", 1)[-1] in {"yaml", "yml"} or self.args.task in {
@@ -776,7 +776,7 @@ class BaseTrainer:
         raise NotImplementedError("get_dataloader function not implemented in trainer")
 
     def build_dataset(self, img_path, mode="train", batch=None):
-        """Build dataset."""
+        """Build datasets."""
         raise NotImplementedError("build_dataset function not implemented in trainer")
 
     def label_loss_items(self, loss_items=None, prefix="train"):

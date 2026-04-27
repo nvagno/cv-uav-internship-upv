@@ -576,7 +576,7 @@ def plot_labels(boxes, cls, names=(), save_dir=Path(""), on_plot=None):
     import polars
     from matplotlib.colors import LinearSegmentedColormap
 
-    # Plot dataset labels
+    # Plot datasets labels
     LOGGER.info(f"Plotting labels to {save_dir / 'labels.jpg'}... ")
     nc = int(cls.max() + 1)  # number of classes
     boxes = boxes[:1000000]  # limit to 1M boxes
@@ -690,7 +690,7 @@ def plot_images(
 
     Args:
         labels (dict[str, Any]): Dictionary containing detection data with keys like 'cls', 'bboxes', 'conf', 'masks',
-            'keypoints', 'batch_idx', 'img'.
+            'keypoints', 'batch_idx', 'images'.
         images (torch.Tensor | np.ndarray): Batch of images to plot. Shape: (batch_size, channels, height, width).
         paths (list[str] | None): List of file paths for each image in the batch.
         fname (str): Output filename for the plotted image grid.
@@ -728,7 +728,7 @@ def plot_images(
     confs = labels.get("conf", None)
     masks = labels.get("masks", np.zeros(0, dtype=np.uint8))
     kpts = labels.get("keypoints", np.zeros(0, dtype=np.float32))
-    images = labels.get("img", images)  # default to input images
+    images = labels.get("images", images)  # default to input images
 
     if len(images) and isinstance(images, torch.Tensor):
         images = images.cpu().float().numpy()

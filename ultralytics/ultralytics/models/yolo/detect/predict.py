@@ -48,7 +48,7 @@ class DetectionPredictor(BasePredictor):
         Examples:
             >>> predictor = DetectionPredictor(overrides=dict(model="yolo26n.pt"))
             >>> results = predictor.predict("path/to/image.jpg")
-            >>> processed_results = predictor.postprocess(preds, img, orig_imgs)
+            >>> processed_results = predictor.postprocess(preds, images, orig_imgs)
         """
         save_feats = getattr(self, "_feats", None) is not None
         preds = nms.non_max_suppression(
@@ -88,7 +88,7 @@ class DetectionPredictor(BasePredictor):
         obj_feats = torch.cat(
             [x.permute(0, 2, 3, 1).reshape(x.shape[0], -1, s, x.shape[1] // s).mean(dim=-1) for x in feat_maps], dim=1
         )  # mean reduce all vectors to same length
-        return [feats[idx] if idx.shape[0] else [] for feats, idx in zip(obj_feats, idxs)]  # for each img in batch
+        return [feats[idx] if idx.shape[0] else [] for feats, idx in zip(obj_feats, idxs)]  # for each images in batch
 
     def construct_results(self, preds, img, orig_imgs):
         """Construct a list of Results objects from model predictions.

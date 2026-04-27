@@ -334,7 +334,7 @@ class BaseModel(torch.nn.Module):
             self.criterion = self.init_criterion()
 
         if preds is None:
-            preds = self.forward(batch["img"])
+            preds = self.forward(batch["images"])
         return self.criterion(preds, batch)
 
     def init_criterion(self):
@@ -783,7 +783,7 @@ class RTDETRDetectionModel(DetectionModel):
         if not hasattr(self, "criterion"):
             self.criterion = self.init_criterion()
 
-        img = batch["img"]
+        img = batch["images"]
         # NOTE: preprocess gt_bbox and gt_labels to list.
         bs = img.shape[0]
         batch_idx = batch["batch_idx"]
@@ -976,7 +976,7 @@ class WorldModel(DetectionModel):
             self.criterion = self.init_criterion()
 
         if preds is None:
-            preds = self.forward(batch["img"], txt_feats=batch["txt_feats"])
+            preds = self.forward(batch["images"], txt_feats=batch["txt_feats"])
         return self.criterion(preds, batch)
 
 
@@ -1226,7 +1226,7 @@ class YOLOEModel(DetectionModel):
             )
         if preds is None:
             preds = self.forward(
-                batch["img"],
+                batch["images"],
                 tpe=None if "visuals" in batch else batch.get("txt_feats", None),
                 vpe=batch.get("visuals", None),
             )
@@ -1278,7 +1278,7 @@ class YOLOESegModel(YOLOEModel, SegmentationModel):
             )
 
         if preds is None:
-            preds = self.forward(batch["img"], tpe=batch.get("txt_feats", None), vpe=batch.get("visuals", None))
+            preds = self.forward(batch["images"], tpe=batch.get("txt_feats", None), vpe=batch.get("visuals", None))
         return self.criterion(preds, batch)
 
 

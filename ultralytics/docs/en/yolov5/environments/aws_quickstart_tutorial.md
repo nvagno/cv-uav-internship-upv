@@ -70,18 +70,18 @@ pip install -r requirements.txt
 With the environment ready, you can start using YOLOv5 for various tasks:
 
 ```bash
-# Train a YOLOv5 model on a custom dataset (e.g., coco128.yaml)
-python train.py --data coco128.yaml --weights yolov5s.pt --img 640
+# Train a YOLOv5 model on a custom datasets (e.g., coco128.yaml)
+python train.py --data coco128.yaml --weights yolov5s.pt --images 640
 
 # Validate the performance (Precision, Recall, mAP) of a trained model (e.g., yolov5s.pt)
-python val.py --weights yolov5s.pt --data coco128.yaml --img 640
+python val.py --weights yolov5s.pt --data coco128.yaml --images 640
 
 # Run inference (object detection) on images or videos using a trained model
-python detect.py --weights yolov5s.pt --source path/to/your/images_or_videos/ --img 640
+python detect.py --weights yolov5s.pt --source path/to/your/images_or_videos/ --images 640
 
 # Export the trained model to various formats like ONNX, CoreML, TFLite for deployment
 # See https://docs.ultralytics.com/modes/export/ for more details
-python export.py --weights yolov5s.pt --include onnx coreml tflite --img 640
+python export.py --weights yolov5s.pt --include onnx coreml tflite --images 640
 ```
 
 Refer to the Ultralytics documentation for detailed guides on [Training](https://docs.ultralytics.com/modes/train/), [Validation](https://docs.ultralytics.com/modes/val/), [Prediction (Inference)](https://docs.ultralytics.com/modes/predict/), and [Exporting](https://docs.ultralytics.com/modes/export/).

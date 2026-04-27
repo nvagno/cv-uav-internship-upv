@@ -496,8 +496,8 @@ class Predictor(BasePredictor):
 
         Examples:
             >>> predictor = Predictor()
-            >>> preds = predictor.inference(img)
-            >>> results = predictor.postprocess(preds, img, orig_imgs)
+            >>> preds = predictor.inference(images)
+            >>> results = predictor.postprocess(preds, images, orig_imgs)
         """
         # (N, 1, H, W), (N, 1)
         pred_masks, pred_scores = preds[:2]

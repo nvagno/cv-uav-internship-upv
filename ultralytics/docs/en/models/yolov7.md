@@ -109,7 +109,7 @@ To use YOLOv7 ONNX model with Ultralytics:
     ```bash
     git clone https://github.com/WongKinYiu/yolov7
     cd yolov7
-    python export.py --weights yolov7-tiny.pt --grid --end2end --simplify --topk-all 100 --iou-thres 0.65 --conf-thres 0.35 --img-size 640 640 --max-wh 640
+    python export.py --weights yolov7-tiny.pt --grid --end2end --simplify --topk-all 100 --iou-thres 0.65 --conf-thres 0.35 --images-size 640 640 --max-wh 640
     ```
 
 3. Modify the ONNX model graph to be compatible with Ultralytics using the following script:

@@ -1,7 +1,7 @@
 ---
 comments: true
-description: Learn how to fine-tune YOLO26 on a custom dataset with pretrained weights. Complete guide covering transfer learning, layer freezing, optimizer selection, two-stage training, and troubleshooting common issues like low mAP and catastrophic forgetting.
-keywords: fine-tune YOLO, finetune YOLO custom dataset, YOLO transfer learning, YOLO26 fine-tuning, freeze layers YOLO, pretrained YOLO custom data, YOLO training from scratch vs fine-tuning, catastrophic forgetting YOLO, two-stage fine-tuning, YOLO optimizer selection, fine-tune object detection model, custom object detection training, YOLO freeze backbone, how to finetune YOLO26
+description: Learn how to fine-tune YOLO26 on a custom datasets with pretrained weights. Complete guide covering transfer learning, layer freezing, optimizer selection, two-stage training, and troubleshooting common issues like low mAP and catastrophic forgetting.
+keywords: fine-tune YOLO, finetune YOLO custom datasets, YOLO transfer learning, YOLO26 fine-tuning, freeze layers YOLO, pretrained YOLO custom data, YOLO training from scratch vs fine-tuning, catastrophic forgetting YOLO, two-stage fine-tuning, YOLO optimizer selection, fine-tune object detection model, custom object detection training, YOLO freeze backbone, how to finetune YOLO26
 ---
 
 # How to Fine-Tune YOLO on a Custom Dataset

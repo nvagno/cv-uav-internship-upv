@@ -50,19 +50,19 @@ Once the video starts playing, you can dynamically reposition the counting regio
 
 ```bash
 # Run inference on a video source, saving results and viewing output
-python yolov8_region_counter.py --source "path/to/video.mp4" --save-img --view-img
+python yolov8_region_counter.py --source "path/to/video.mp4" --save-images --view-images
 
 # Run inference using the CPU
-python yolov8_region_counter.py --source "path/to/video.mp4" --save-img --view-img --device cpu
+python yolov8_region_counter.py --source "path/to/video.mp4" --save-images --view-images --device cpu
 
 # Use a specific Ultralytics YOLO11 model file
-python yolov8_region_counter.py --source "path/to/video.mp4" --save-img --weights "path/to/yolo11n.pt"
+python yolov8_region_counter.py --source "path/to/video.mp4" --save-images --weights "path/to/yolo11n.pt"
 
 # Detect only specific classes (e.g., class 0 and class 2)
 python yolov8_region_counter.py --source "path/to/video.mp4" --classes 0 2 --weights "path/to/yolo11m.pt"
 
 # Run inference without saving the output video/images
-python yolov8_region_counter.py --source "path/to/video.mp4" --view-img
+python yolov8_region_counter.py --source "path/to/video.mp4" --view-images
 ```
 
 Learn more about inference arguments in the Ultralytics [Predict Mode documentation](https://docs.ultralytics.com/modes/predict/).

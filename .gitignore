@@ -3,3 +3,5 @@
 yolov9_trees.onnx
 datasets
 zone.tif
+potential
+best.pt

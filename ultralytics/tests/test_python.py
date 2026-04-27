@@ -164,7 +164,7 @@ def test_predict_gray_and_4ch(tmp_path):
 @pytest.mark.skipif(not ONLINE, reason="environment is offline")
 def test_predict_all_image_formats():
     """Predict on all 12 image formats (AVIF, BMP, DNG, HEIC, JP2, JPEG, JPG, MPO, PNG, TIF, TIFF, WebP)."""
-    # Download dataset if needed
+    # Download datasets if needed
     data = check_det_dataset("coco12-formats.yaml")
     dataset_path = Path(data["path"])
 
@@ -237,7 +237,7 @@ def test_val(task: str, weight: str, data: str) -> None:
 @pytest.mark.skipif(not ONLINE, reason="environment is offline")
 @pytest.mark.skipif(IS_JETSON or IS_RASPBERRYPI, reason="Edge devices not intended for training")
 def test_train_scratch():
-    """Test training the YOLO model from scratch on 12 different image types in the COCO12-Formats dataset."""
+    """Test training the YOLO model from scratch on 12 different image types in the COCO12-Formats datasets."""
     model = YOLO(CFG)
     model.train(data="coco12-formats.yaml", epochs=2, imgsz=32, cache="disk", batch=-1, close_mosaic=1, name="model")
     model(SOURCE)
@@ -245,7 +245,7 @@ def test_train_scratch():
 
 @pytest.mark.skipif(not ONLINE, reason="environment is offline")
 def test_train_ndjson():
-    """Test training the YOLO model using NDJSON format dataset."""
+    """Test training the YOLO model using NDJSON format datasets."""
     model = YOLO(WEIGHTS_DIR / "yolo26n.pt")
     model.train(data=f"{ASSETS_URL}/coco8-ndjson.ndjson", epochs=1, imgsz=32)
 
@@ -354,7 +354,7 @@ def test_labels_and_crops():
 
 @pytest.mark.skipif(not ONLINE, reason="environment is offline")
 def test_data_utils(tmp_path):
-    """Test data utility functions including dataset stats, auto-splitting, and zip archiving."""
+    """Test data utility functions including datasets stats, auto-splitting, and zip archiving."""
     from ultralytics.data.split import autosplit
     from ultralytics.data.utils import HUBDatasetStats
     from ultralytics.utils.downloads import zip_directory
@@ -396,7 +396,7 @@ def test_safe_download_unzips_local_path_archive(tmp_path):
 
 @pytest.mark.skipif(not ONLINE, reason="environment is offline")
 def test_data_converter(tmp_path):
-    """Test dataset conversion functions from COCO to YOLO format and class mappings."""
+    """Test datasets conversion functions from COCO to YOLO format and class mappings."""
     from ultralytics.data.converter import coco80_to_coco91_class, convert_coco
 
     download(f"{ASSETS_URL}/instances_val2017.json", dir=tmp_path)

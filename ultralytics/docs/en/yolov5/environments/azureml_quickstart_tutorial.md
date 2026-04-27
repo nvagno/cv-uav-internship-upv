@@ -84,29 +84,29 @@ With the setup complete, you can now train, validate, perform inference, and exp
 - **Train** the model on a dataset like [COCO128](../../datasets/detect/coco128.md). Check the [Training Mode](../../modes/train.md) documentation for more details.
 
     ```bash
-    # Start training using yolov5s pretrained weights on the COCO128 dataset
-    python train.py --data coco128.yaml --weights yolov5s.pt --img 640 --epochs 10 --batch 16
+    # Start training using yolov5s pretrained weights on the COCO128 datasets
+    python train.py --data coco128.yaml --weights yolov5s.pt --images 640 --epochs 10 --batch 16
     ```
 
 - **Validate** the trained model's performance using metrics like [Precision](https://www.ultralytics.com/glossary/precision), [Recall](https://www.ultralytics.com/glossary/recall), and [mAP](https://www.ultralytics.com/glossary/mean-average-precision-map). See the [Validation Mode](../../modes/val.md) guide for options.
 
     ```bash
     # Validate the yolov5s model on the COCO128 validation set
-    python val.py --weights yolov5s.pt --data coco128.yaml --img 640
+    python val.py --weights yolov5s.pt --data coco128.yaml --images 640
     ```
 
 - **Run Inference** on new images or videos. Explore the [Prediction Mode](../../modes/predict.md) documentation for various inference sources.
 
     ```bash
     # Run inference with yolov5s on sample images
-    python detect.py --weights yolov5s.pt --source data/images --img 640
+    python detect.py --weights yolov5s.pt --source data/images --images 640
     ```
 
 - **Export** the model to different formats like ONNX, [TensorRT](https://www.ultralytics.com/glossary/tensorrt), or [CoreML](https://docs.ultralytics.com/integrations/coreml/) for deployment. Refer to the [Export Mode](../../modes/export.md) guide and the [ONNX Integration](../../integrations/onnx.md) page.
 
     ```bash
     # Export yolov5s to ONNX format
-    python export.py --weights yolov5s.pt --include onnx --img 640
+    python export.py --weights yolov5s.pt --include onnx --images 640
     ```
 
 ## Using a Notebook
@@ -141,7 +141,7 @@ After creating the kernel, refresh your browser. When you open or create a `.ipy
     source activate yolov5env # Activate environment within the cell
 
     # Example: Run validation using the activated environment
-    python val.py --weights yolov5s.pt --data coco128.yaml --img 640
+    python val.py --weights yolov5s.pt --data coco128.yaml --images 640
     ```
 
 Congratulations! You've successfully set up and run Ultralytics YOLOv5 on AzureML. For further exploration, consider checking out other [Ultralytics Integrations](../../integrations/index.md) or the detailed [YOLOv5 documentation](../index.md). You might also find the [AzureML documentation](https://learn.microsoft.com/en-us/azure/machine-learning/?view=azureml-api-2) useful for advanced scenarios like distributed training or model deployment as an endpoint.

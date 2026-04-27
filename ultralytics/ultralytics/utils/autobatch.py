@@ -28,7 +28,7 @@ def check_train_batch_size(
         imgsz (int, optional): Image size used for training.
         amp (bool, optional): Use automatic mixed precision if True.
         batch (int | float, optional): Fraction of GPU memory to use. If -1, use default.
-        max_num_obj (int, optional): The maximum number of objects from dataset.
+        max_num_obj (int, optional): The maximum number of objects from datasets.
         dataset_size (int, optional): Total number of training images. If > 0, batch size will not exceed this value.
 
     Returns:
@@ -63,7 +63,7 @@ def autobatch(
         imgsz (int, optional): The image size used as input for the YOLO model.
         fraction (float, optional): The fraction of available CUDA memory to use.
         batch_size (int, optional): The default batch size to use if an error is detected.
-        max_num_obj (int, optional): The maximum number of objects from dataset.
+        max_num_obj (int, optional): The maximum number of objects from datasets.
         dataset_size (int, optional): Total number of training images. If > 0, batch size will not exceed this value.
 
     Returns:

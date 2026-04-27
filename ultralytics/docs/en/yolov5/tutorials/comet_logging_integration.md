@@ -51,7 +51,7 @@ project_name=YOUR_COMET_PROJECT_NAME # This will default to 'yolov5'
 
 ```bash
 # Train YOLOv5s on COCO128 for 5 epochs
-python train.py --img 640 --batch 16 --epochs 5 --data coco128.yaml --weights yolov5s.pt
+python train.py --images 640 --batch 16 --epochs 5 --data coco128.yaml --weights yolov5s.pt
 ```
 
 That's it! Comet will automatically log your hyperparameters, command line arguments, training and validation metrics. You can visualize and analyze your runs in the Comet UI.
@@ -108,7 +108,7 @@ Logging Models to Comet is disabled by default. To enable it, pass the `save-per
 
 ```bash
 python train.py \
-  --img 640 \
+  --images 640 \
   --batch 16 \
   --epochs 5 \
   --data coco128.yaml \
@@ -128,7 +128,7 @@ Here is an [example project using the Panel](https://www.comet.com/examples/come
 
 ```bash
 python train.py \
-  --img 640 \
+  --images 640 \
   --batch 16 \
   --epochs 5 \
   --data coco128.yaml \
@@ -142,7 +142,7 @@ When logging predictions from YOLOv5, Comet will log the images associated with 
 
 ```bash
 env COMET_MAX_IMAGE_UPLOADS=200 python train.py \
-  --img 640 \
+  --images 640 \
   --batch 16 \
   --epochs 5 \
   --data coco128.yaml \
@@ -156,7 +156,7 @@ Use the `COMET_LOG_PER_CLASS_METRICS` environment variable to log mAP, precision
 
 ```bash
 env COMET_LOG_PER_CLASS_METRICS=true python train.py \
-  --img 640 \
+  --images 640 \
   --batch 16 \
   --epochs 5 \
   --data coco128.yaml \
@@ -171,7 +171,7 @@ The dataset should be organized as described in the [YOLOv5 documentation](./tra
 
 ```bash
 python train.py \
-  --img 640 \
+  --images 640 \
   --batch 16 \
   --epochs 5 \
   --data coco128.yaml \
@@ -204,7 +204,7 @@ Then pass this file to your training script in the following way:
 
 ```bash
 python train.py \
-  --img 640 \
+  --images 640 \
   --batch 16 \
   --epochs 5 \
   --data artifact.yaml \

@@ -24,7 +24,7 @@ class OBBValidator(DetectionValidator):
     Attributes:
         args (dict): Configuration arguments for the validator.
         metrics (OBBMetrics): Metrics object for evaluating OBB model performance.
-        is_dota (bool): Flag indicating whether the validation dataset is in DOTA format.
+        is_dota (bool): Flag indicating whether the validation datasets is in DOTA format.
 
     Methods:
         init_metrics: Initialize evaluation metrics for YOLO.
@@ -67,7 +67,7 @@ class OBBValidator(DetectionValidator):
         """
         super().init_metrics(model)
         val = self.data.get(self.args.split, "")  # validation path
-        self.is_dota = isinstance(val, str) and "DOTA" in val  # check if dataset is DOTA format
+        self.is_dota = isinstance(val, str) and "DOTA" in val  # check if datasets is DOTA format
         self.confusion_matrix.task = "obb"  # set confusion matrix task to 'obb'
 
     def _process_batch(self, preds: dict[str, torch.Tensor], batch: dict[str, torch.Tensor]) -> dict[str, np.ndarray]:
@@ -118,7 +118,7 @@ class OBBValidator(DetectionValidator):
                 - cls: Tensor of class labels
                 - bboxes: Tensor of bounding boxes
                 - ori_shape: Original image shapes
-                - img: Batch of images
+                - images: Batch of images
                 - ratio_pad: Ratio and padding information
 
         Returns:
@@ -128,7 +128,7 @@ class OBBValidator(DetectionValidator):
         cls = batch["cls"][idx].squeeze(-1)
         bbox = batch["bboxes"][idx]
         ori_shape = batch["ori_shape"][si]
-        imgsz = batch["img"].shape[2:]
+        imgsz = batch["images"].shape[2:]
         ratio_pad = batch["ratio_pad"][si]
         if cls.shape[0]:
             bbox[..., :4].mul_(torch.tensor(imgsz, device=self.device)[[1, 0, 1, 0]])  # target boxes
@@ -151,7 +151,7 @@ class OBBValidator(DetectionValidator):
 
         Examples:
             >>> validator = OBBValidator()
-            >>> batch = {"img": images, "im_file": paths}
+            >>> batch = {"images": images, "im_file": paths}
             >>> preds = [{"bboxes": torch.rand(10, 5), "cls": torch.zeros(10), "conf": torch.rand(10)}]
             >>> validator.plot_predictions(batch, preds, 0)
         """
@@ -162,7 +162,7 @@ class OBBValidator(DetectionValidator):
         keys = preds[0].keys()
         batched_preds = {k: torch.cat([x[k] for x in preds], dim=0) for k in keys}
         plot_images(
-            images=batch["img"],
+            images=batch["images"],
             labels=batched_preds,
             paths=batch["im_file"],
             fname=self.save_dir / f"val_batch{ni}_pred.jpg",

@@ -19,5 +19,5 @@ results = model.train(
     batch=15,
     amp=False,
     patience=50,
-    device="cpu"
+    device=0
 )

@@ -657,7 +657,7 @@ nav:
           - base: reference/data/base.md
           - build: reference/data/build.md
           - converter: reference/data/converter.md
-          - dataset: reference/data/dataset.md
+          - dataset: reference/data/datasets.md
           - loaders: reference/data/loaders.md
           - split: reference/data/split.md
           - split_dota: reference/data/split_dota.md

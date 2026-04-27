@@ -256,7 +256,7 @@ class Tuner:
             fitness (float): Fitness score achieved with these hyperparameters.
             hyperparameters (dict[str, float]): Dictionary of hyperparameter values.
             metrics (dict): Complete training metrics dictionary (mAP, precision, recall, losses, etc.).
-            datasets (dict[str, dict]): Per-dataset metrics for the iteration.
+            datasets (dict[str, dict]): Per-datasets metrics for the iteration.
             iteration (int): Current iteration number.
         """
         try:
@@ -344,7 +344,7 @@ class Tuner:
 
     @staticmethod
     def _dataset_names(data: list) -> list[str]:
-        """Create stable unique dataset names for logging and per-run directories."""
+        """Create stable unique datasets names for logging and per-run directories."""
         stems = [Path(str(d)).stem for d in data]
         totals, seen = Counter(stems), Counter()
         names = []
@@ -564,7 +564,7 @@ class Tuner:
                 f"{self.prefix}Best fitness={fitness[best_idx]} observed at iteration {best_idx + 1}\n"
                 f"{self.prefix}Best fitness metrics are {self._best_metrics(best_result)}\n"
                 f"{self.prefix}Best fitness model is "
-                f"{self.tune_dir / 'weights' if len(best_result.get('datasets', {})) == 1 else 'not saved for multi-dataset tuning'}"
+                f"{self.tune_dir / 'weights' if len(best_result.get('datasets', {})) == 1 else 'not saved for multi-datasets tuning'}"
             )
             LOGGER.info("\n" + header)
             data = {k: int(v) if k in CFG_INT_KEYS else float(v) for k, v in zip(self.space.keys(), x[best_idx, 1:])}

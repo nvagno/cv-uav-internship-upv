@@ -297,7 +297,7 @@ class LoadScreenshots:
         s = f"screen {self.screen} (LTWH): {self.left},{self.top},{self.width},{self.height}: "
 
         self.frame += 1
-        return [str(self.screen)], [im0], [s]  # screen, img, string
+        return [str(self.screen)], [im0], [s]  # screen, images, string
 
 
 class LoadImagesAndVideos:
@@ -467,7 +467,7 @@ class LoadImagesAndVideos:
         self.frames = int(self.cap.get(cv2.CAP_PROP_FRAME_COUNT) / self.vid_stride)
 
     def __len__(self) -> int:
-        """Return the number of batches in the dataset."""
+        """Return the number of batches in the datasets."""
         return math.ceil(self.nf / self.bs)  # number of batches
 
 

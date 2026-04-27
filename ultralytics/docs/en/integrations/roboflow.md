@@ -1,7 +1,7 @@
 ---
 comments: true
 description: Learn how to label data and export datasets in YOLO format using Roboflow for training Ultralytics models.
-keywords: Roboflow, Ultralytics YOLO, data labeling, computer vision, dataset export
+keywords: Roboflow, Ultralytics YOLO, data labeling, computer vision, datasets export
 ---
 
 # Roboflow
@@ -124,7 +124,7 @@ rf = roboflow.Roboflow()
 # Define your workspace and project details
 WORKSPACE_ID = "your-workspace-id"  # Replace with your actual Workspace ID
 PROJECT_ID = "your-project-id"  # Replace with your actual Project ID
-VERSION = 1  # Replace with your desired dataset version number
+VERSION = 1  # Replace with your desired datasets version number
 MODEL_PATH = "path/to/your/runs/detect/train/"  # Replace with the path to your YOLO26 training results directory
 
 # Get project and version

@@ -55,7 +55,7 @@ yolo export model=yolov8n.pt format=onnx # Export yolov8n model to ONNX
 Execute the `main.py` script with the path to your ONNX model and input image. You can also adjust the confidence and [Intersection over Union (IoU)](https://www.ultralytics.com/glossary/intersection-over-union-iou) thresholds for [object detection](https://docs.ultralytics.com/tasks/detect/).
 
 ```bash
-python main.py --model yolov8n.onnx --img image.jpg --conf-thres 0.5 --iou-thres 0.5
+python main.py --model yolov8n.onnx --images image.jpg --conf-thres 0.5 --iou-thres 0.5
 ```
 
 - `--model`: Path to the YOLOv8 ONNX model file (e.g., `yolov8n.onnx`).

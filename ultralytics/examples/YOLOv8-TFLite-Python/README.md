@@ -54,7 +54,7 @@ Follow these steps to run inference with your exported YOLOv8 TFLite model.
     ```bash
     python main.py \
       --model yolov8n_saved_model/yolov8n_full_integer_quant.tflite \
-      --img image.jpg \
+      --images image.jpg \
       --conf 0.25 \
       --iou 0.45 \
       --metadata yolov8n_saved_model/metadata.yaml

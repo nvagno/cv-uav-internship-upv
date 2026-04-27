@@ -24,7 +24,7 @@ class YOLOv8:
         input_image (str): Path to the input image file.
         confidence_thres (float): Confidence threshold for filtering detections.
         iou_thres (float): IoU threshold for non-maximum suppression.
-        classes (list[str]): List of class names from the COCO dataset.
+        classes (list[str]): List of class names from the COCO datasets.
         color_palette (np.ndarray): Random color palette for visualizing different classes.
         input_width (int): Width dimension of the model input.
         input_height (int): Height dimension of the model input.
@@ -59,7 +59,7 @@ class YOLOv8:
         self.confidence_thres = confidence_thres
         self.iou_thres = iou_thres
 
-        # Load the class names from the COCO dataset
+        # Load the class names from the COCO datasets
         self.classes = YAML.load(check_yaml("coco8.yaml"))["names"]
 
         # Generate a color palette for the classes
@@ -73,7 +73,7 @@ class YOLOv8:
             new_shape (tuple[int, int]): Target shape (height, width) for the image.
 
         Returns:
-            img (np.ndarray): Resized and padded image.
+            images (np.ndarray): Resized and padded image.
             pad (tuple[int, int]): Padding values (top, left) applied to the image.
         """
         shape = img.shape[:2]  # current shape [height, width]
@@ -260,7 +260,7 @@ if __name__ == "__main__":
     # Create an argument parser to handle command-line arguments
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", type=str, default="yolov8n.onnx", help="Input your ONNX model.")
-    parser.add_argument("--img", type=str, default=str(ASSETS / "bus.jpg"), help="Path to input image.")
+    parser.add_argument("--images", type=str, default=str(ASSETS / "bus.jpg"), help="Path to input image.")
     parser.add_argument("--conf-thres", type=float, default=0.5, help="Confidence threshold")
     parser.add_argument("--iou-thres", type=float, default=0.5, help="NMS IoU threshold")
     args = parser.parse_args()

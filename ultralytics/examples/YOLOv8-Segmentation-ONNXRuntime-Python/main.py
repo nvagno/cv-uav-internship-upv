@@ -24,7 +24,7 @@ class YOLOv8Seg:
     Attributes:
         session (ort.InferenceSession): ONNX Runtime inference session for model execution.
         imgsz (tuple[int, int]): Input image size as (height, width) for the model.
-        classes (dict): Dictionary mapping class indices to class names from the dataset.
+        classes (dict): Dictionary mapping class indices to class names from the datasets.
         conf (float): Confidence threshold for filtering detections.
         iou (float): IoU threshold used by non-maximum suppression.
 
@@ -36,8 +36,8 @@ class YOLOv8Seg:
 
     Examples:
         >>> model = YOLOv8Seg("yolov8n-seg.onnx", conf=0.25, iou=0.7)
-        >>> img = cv2.imread("image.jpg")
-        >>> results = model(img)
+        >>> images = cv2.imread("image.jpg")
+        >>> results = model(images)
         >>> cv2.imshow("Segmentation", results[0].plot())
     """
 

@@ -25,9 +25,9 @@ class DetectionValidator(BaseValidator):
     prediction processing, and visualization of results.
 
     Attributes:
-        is_coco (bool): Whether the dataset is COCO.
-        is_lvis (bool): Whether the dataset is LVIS.
-        class_map (list[int]): Mapping from model class indices to dataset class indices.
+        is_coco (bool): Whether the datasets is COCO.
+        is_lvis (bool): Whether the datasets is LVIS.
+        class_map (list[int]): Mapping from model class indices to datasets class indices.
         metrics (DetMetrics): Object detection metrics calculator.
         iouv (torch.Tensor): IoU thresholds for mAP calculation.
         niou (int): Number of IoU thresholds.
@@ -72,7 +72,7 @@ class DetectionValidator(BaseValidator):
         for k, v in batch.items():
             if isinstance(v, torch.Tensor):
                 batch[k] = v.to(self.device, non_blocking=self.device.type == "cuda")
-        batch["img"] = (batch["img"].half() if self.args.half else batch["img"].float()) / 255
+        batch["images"] = (batch["images"].half() if self.args.half else batch["images"].float()) / 255
         return batch
 
     def init_metrics(self, model: torch.nn.Module) -> None:
@@ -141,7 +141,7 @@ class DetectionValidator(BaseValidator):
         cls = batch["cls"][idx].squeeze(-1)
         bbox = batch["bboxes"][idx]
         ori_shape = batch["ori_shape"][si]
-        imgsz = batch["img"].shape[2:]
+        imgsz = batch["images"].shape[2:]
         ratio_pad = batch["ratio_pad"][si]
         if cls.shape[0]:
             bbox = ops.xywh2xyxy(bbox) * torch.tensor(imgsz, device=self.device)[[1, 0, 1, 0]]  # target boxes
@@ -195,7 +195,7 @@ class DetectionValidator(BaseValidator):
             if self.args.plots:
                 self.confusion_matrix.process_batch(predn, pbatch, conf=self.args.conf)
                 if self.args.visualize:
-                    self.confusion_matrix.plot_matches(batch["img"][si], pbatch["im_file"], self.save_dir)
+                    self.confusion_matrix.plot_matches(batch["images"][si], pbatch["im_file"], self.save_dir)
 
             if no_pred:
                 continue
@@ -251,7 +251,7 @@ class DetectionValidator(BaseValidator):
                 self.jdict.extend(jdict)
             self.metrics.stats = merged_stats
             self._gather_image_metrics(self.metrics.box)
-            self.seen = len(self.dataloader.dataset)  # total image count from dataset
+            self.seen = len(self.dataloader.dataset)  # total image count from datasets
         elif RANK > 0:
             dist.gather_object(self.metrics.stats, None, dst=0)
             dist.gather_object(self.jdict, None, dst=0)
@@ -314,7 +314,7 @@ class DetectionValidator(BaseValidator):
             batch (int, optional): Size of batches, this is for `rect`.
 
         Returns:
-            (Dataset): YOLO dataset.
+            (Dataset): YOLO datasets.
         """
         return build_yolo_dataset(self.args, img_path, batch, self.data, mode=mode, stride=self.stride)
 
@@ -322,7 +322,7 @@ class DetectionValidator(BaseValidator):
         """Construct and return dataloader.
 
         Args:
-            dataset_path (str): Path to the dataset.
+            dataset_path (str): Path to the datasets.
             batch_size (int): Size of each batch.
 
         Returns:
@@ -374,7 +374,7 @@ class DetectionValidator(BaseValidator):
         batched_preds = {k: torch.cat([x[k][:max_det] for x in preds], dim=0) for k in keys}
         batched_preds["bboxes"] = ops.xyxy2xywh(batched_preds["bboxes"])  # convert to xywh format
         plot_images(
-            images=batch["img"],
+            images=batch["images"],
             labels=batched_preds,
             paths=batch["im_file"],
             fname=self.save_dir / f"val_batch{ni}_pred.jpg",

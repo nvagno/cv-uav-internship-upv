@@ -82,8 +82,8 @@ class ClassificationValidator(BaseValidator):
 
     def preprocess(self, batch: dict[str, Any]) -> dict[str, Any]:
         """Preprocess input batch by moving data to device and converting to appropriate dtype."""
-        batch["img"] = batch["img"].to(self.device, non_blocking=self.device.type == "cuda")
-        batch["img"] = batch["img"].half() if self.args.half else batch["img"].float()
+        batch["images"] = batch["images"].to(self.device, non_blocking=self.device.type == "cuda")
+        batch["images"] = batch["images"].half() if self.args.half else batch["images"].float()
         batch["cls"] = batch["cls"].to(self.device, non_blocking=self.device.type == "cuda")
         return batch
 
@@ -154,11 +154,11 @@ class ClassificationValidator(BaseValidator):
         """Build and return a data loader for classification validation.
 
         Args:
-            dataset_path (str | Path): Path to the dataset directory.
+            dataset_path (str | Path): Path to the datasets directory.
             batch_size (int): Number of samples per batch.
 
         Returns:
-            (torch.utils.data.DataLoader): DataLoader object for the classification validation dataset.
+            (torch.utils.data.DataLoader): DataLoader object for the classification validation datasets.
         """
         dataset = self.build_dataset(dataset_path)
         return build_dataloader(dataset, batch_size, self.args.workers, rank=-1)
@@ -172,15 +172,15 @@ class ClassificationValidator(BaseValidator):
         """Plot validation image samples with their ground truth labels.
 
         Args:
-            batch (dict[str, Any]): Dictionary containing batch data with 'img' (images) and 'cls' (class labels).
+            batch (dict[str, Any]): Dictionary containing batch data with 'images' (images) and 'cls' (class labels).
             ni (int): Batch index used for naming the output file.
 
         Examples:
             >>> validator = ClassificationValidator()
-            >>> batch = {"img": torch.rand(16, 3, 224, 224), "cls": torch.randint(0, 10, (16,))}
+            >>> batch = {"images": torch.rand(16, 3, 224, 224), "cls": torch.randint(0, 10, (16,))}
             >>> validator.plot_val_samples(batch, 0)
         """
-        batch["batch_idx"] = torch.arange(batch["img"].shape[0])  # add batch index for plotting
+        batch["batch_idx"] = torch.arange(batch["images"].shape[0])  # add batch index for plotting
         plot_images(
             labels=batch,
             fname=self.save_dir / f"val_batch{ni}_labels.jpg",
@@ -198,13 +198,13 @@ class ClassificationValidator(BaseValidator):
 
         Examples:
             >>> validator = ClassificationValidator()
-            >>> batch = {"img": torch.rand(16, 3, 224, 224)}
+            >>> batch = {"images": torch.rand(16, 3, 224, 224)}
             >>> preds = torch.rand(16, 10)  # 16 images, 10 classes
             >>> validator.plot_predictions(batch, preds, 0)
         """
         batched_preds = dict(
-            img=batch["img"],
-            batch_idx=torch.arange(batch["img"].shape[0]),
+            img=batch["images"],
+            batch_idx=torch.arange(batch["images"].shape[0]),
             cls=torch.argmax(preds, dim=1),
             conf=torch.amax(preds, dim=1),
         )

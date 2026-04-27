@@ -29,8 +29,8 @@ def imread(filename: str, flags: int = cv2.IMREAD_COLOR) -> np.ndarray | None:
         (np.ndarray | None): The read image array, or None if reading fails.
 
     Examples:
-        >>> img = imread("path/to/image.jpg")
-        >>> img = imread("path/to/image.jpg", cv2.IMREAD_GRAYSCALE)
+        >>> images = imread("path/to/image.jpg")
+        >>> images = imread("path/to/image.jpg", cv2.IMREAD_GRAYSCALE)
     """
     file_bytes = np.fromfile(filename, np.uint8)
     if filename.endswith((".tiff", ".tif")):
@@ -118,8 +118,8 @@ def imwrite(filename: str, img: np.ndarray, params: list[int] | None = None) -> 
 
     Examples:
         >>> import numpy as np
-        >>> img = np.zeros((100, 100, 3), dtype=np.uint8)  # Create a black image
-        >>> success = imwrite("output.jpg", img)  # Write image to file
+        >>> images = np.zeros((100, 100, 3), dtype=np.uint8)  # Create a black image
+        >>> success = imwrite("output.jpg", images)  # Write image to file
         >>> print(success)
         True
     """
@@ -143,9 +143,9 @@ def imshow(winname: str, mat: np.ndarray) -> None:
 
     Examples:
         >>> import numpy as np
-        >>> img = np.zeros((300, 300, 3), dtype=np.uint8)  # Create a black image
-        >>> img[:100, :100] = [255, 0, 0]  # Add a blue square
-        >>> imshow("Example Window", img)  # Display the image
+        >>> images = np.zeros((300, 300, 3), dtype=np.uint8)  # Create a black image
+        >>> images[:100, :100] = [255, 0, 0]  # Add a blue square
+        >>> imshow("Example Window", images)  # Display the image
     """
     _imshow(winname.encode("unicode_escape").decode(), mat)
 

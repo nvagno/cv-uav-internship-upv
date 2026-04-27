@@ -161,8 +161,8 @@ You can also use the model for inference or as a starting point for fine-tuning:
 # Use a downloaded model for inference
 yolo predict model=path/to/downloaded-model.pt source=image.jpg
 
-# Fine-tune on your own dataset
-yolo train model=path/to/downloaded-model.pt data=my-dataset.yaml epochs=50
+# Fine-tune on your own datasets
+yolo train model=path/to/downloaded-model.pt data=my-datasets.yaml epochs=50
 ```
 
 ### Clone Model

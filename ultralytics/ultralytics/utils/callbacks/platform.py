@@ -60,7 +60,7 @@ def resolve_platform_uri(uri, hard=True):
     Raises:
         ValueError: If API key is missing/invalid or URI format is wrong.
         PermissionError: If access is denied.
-        RuntimeError: If resource is not ready (e.g., dataset still processing).
+        RuntimeError: If resource is not ready (e.g., datasets still processing).
         FileNotFoundError: If resource not found and hard=True.
         ConnectionError: If network request fails and hard=True.
     """
@@ -123,7 +123,7 @@ def resolve_platform_uri(uri, hard=True):
     if r.status_code == 401:
         raise ValueError(f"Invalid ULTRALYTICS_API_KEY for '{uri}'")
     if r.status_code == 403:
-        raise PermissionError(f"Access denied for '{uri}'. Check dataset/model visibility settings.")
+        raise PermissionError(f"Access denied for '{uri}'. Check datasets/model visibility settings.")
     if r.status_code == 404:
         if hard:
             raise FileNotFoundError(f"Not found on platform: {uri}")

@@ -187,7 +187,7 @@ const chartConfig = {
         position: "bottom",
         title: {
           display: true,
-          text: "Latency T4 TensorRT10 FP16 (ms/img)",
+          text: "Latency T4 TensorRT10 FP16 (ms/images)",
           color: "#808080",
         },
         grid: { color: "#e0e0e0" },

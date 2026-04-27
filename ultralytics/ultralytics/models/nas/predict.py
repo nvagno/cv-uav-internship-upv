@@ -24,8 +24,8 @@ class NASPredictor(DetectionPredictor):
         >>> model = NAS("yolo_nas_s")
         >>> predictor = model.predictor
 
-        Assume that raw_preds, img, orig_imgs are available
-        >>> results = predictor.postprocess(raw_preds, img, orig_imgs)
+        Assume that raw_preds, images, orig_imgs are available
+        >>> results = predictor.postprocess(raw_preds, images, orig_imgs)
 
     Notes:
         Typically, this class is not instantiated directly. It is used internally within the NAS class.
@@ -49,7 +49,7 @@ class NASPredictor(DetectionPredictor):
 
         Examples:
             >>> predictor = NAS("yolo_nas_s").predictor
-            >>> results = predictor.postprocess(raw_preds, img, orig_imgs)
+            >>> results = predictor.postprocess(raw_preds, images, orig_imgs)
         """
         boxes = ops.xyxy2xywh(preds_in[0][0])  # Convert bounding boxes from xyxy to xywh format
         preds = torch.cat((boxes, preds_in[0][1]), -1).permute(0, 2, 1)  # Concatenate boxes with class scores

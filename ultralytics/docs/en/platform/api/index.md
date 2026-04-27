@@ -230,8 +230,8 @@ GET /api/datasets
     "datasets": [
         {
             "_id": "dataset_abc123",
-            "name": "my-dataset",
-            "slug": "my-dataset",
+            "name": "my-datasets",
+            "slug": "my-datasets",
             "task": "detect",
             "imageCount": 1000,
             "classCount": 10,
@@ -275,10 +275,10 @@ POST /api/datasets
 
 ```json
 {
-    "slug": "my-dataset",
+    "slug": "my-datasets",
     "name": "My Dataset",
     "task": "detect",
-    "description": "A custom detection dataset",
+    "description": "A custom detection datasets",
     "visibility": "private",
     "classNames": ["person", "car"]
 }
@@ -324,8 +324,8 @@ Creates a copy of the dataset with all images and labels. Only public datasets c
 
 ```json
 {
-    "name": "cloned-dataset",
-    "description": "My cloned dataset",
+    "name": "cloned-datasets",
+    "description": "My cloned datasets",
     "visibility": "private",
     "owner": "team-username"
 }
@@ -1342,7 +1342,7 @@ POST /api/trash
 ```json
 {
     "id": "item_abc123",
-    "type": "dataset"
+    "type": "datasets"
 }
 ```
 
@@ -1357,7 +1357,7 @@ DELETE /api/trash
 ```json
 {
     "id": "item_abc123",
-    "type": "dataset"
+    "type": "datasets"
 }
 ```
 
@@ -1625,10 +1625,10 @@ GET /api/storage
         "topItems": [
             {
                 "_id": "dataset_abc123",
-                "name": "my-dataset",
-                "slug": "my-dataset",
+                "name": "my-datasets",
+                "slug": "my-datasets",
                 "sizeBytes": 536870912,
-                "type": "dataset"
+                "type": "datasets"
             },
             {
                 "_id": "model_def456",
@@ -2096,9 +2096,9 @@ from ultralytics import YOLO
 
 model = YOLO("yolo26n.pt")
 
-# Train on your Platform dataset
+# Train on your Platform datasets
 model.train(
-    data="ul://your-username/datasets/your-dataset",
+    data="ul://your-username/datasets/your-datasets",
     epochs=100,
     imgsz=640,
 )
@@ -2180,7 +2180,7 @@ model.export(format="coreml", imgsz=640)
 **Validation:**
 
 ```python
-metrics = model.val(data="ul://username/datasets/my-dataset")
+metrics = model.val(data="ul://username/datasets/my-datasets")
 
 print(f"mAP50: {metrics.box.map50}")
 print(f"mAP50-95: {metrics.box.map}")

@@ -221,7 +221,7 @@ model = YOLO("yolo26n-pose.yaml")  # build a new model from YAML
 model = YOLO("yolo26n-pose.pt")  # load a pretrained model (recommended for training)
 
 # Train the model
-results = model.train(data="your-dataset.yaml", epochs=100, imgsz=640)
+results = model.train(data="your-datasets.yaml", epochs=100, imgsz=640)
 ```
 
 For comprehensive details on training, refer to the [Train Section](#train). You can also use [Ultralytics Platform](https://platform.ultralytics.com) for a no-code approach to training custom pose estimation models.
@@ -238,7 +238,7 @@ model = YOLO("yolo26n-pose.pt")  # load an official model
 model = YOLO("path/to/best.pt")  # load a custom model
 
 # Validate the model
-metrics = model.val()  # no arguments needed, dataset and settings remembered
+metrics = model.val()  # no arguments needed, datasets and settings remembered
 ```
 
 For more information, visit the [Val Section](#val).

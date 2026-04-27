@@ -67,13 +67,13 @@ This will enable integration with the YOLOv5 training script. Every training run
 If you want to change the `project_name` or `task_name`, use the `--project` and `--name` arguments of the `train.py` script, by default the project will be called `YOLOv5` and the task `Training`. PLEASE NOTE: ClearML uses `/` as a delimiter for subprojects, so be careful when using `/` in your project name!
 
 ```bash
-python train.py --img 640 --batch 16 --epochs 3 --data coco8.yaml --weights yolov5s.pt --cache
+python train.py --images 640 --batch 16 --epochs 3 --data coco8.yaml --weights yolov5s.pt --cache
 ```
 
 or with custom project and task name:
 
 ```bash
-python train.py --project my_project --name my_training --img 640 --batch 16 --epochs 3 --data coco8.yaml --weights yolov5s.pt --cache
+python train.py --project my_project --name my_training --images 640 --batch 16 --epochs 3 --data coco8.yaml --weights yolov5s.pt --cache
 ```
 
 This will capture:
@@ -146,7 +146,7 @@ The command `clearml-data sync` is actually a shorthand command. You could also 
 
 ```bash
 # Optionally add --parent <parent_dataset_id> if you want to base
-# this version on another dataset version, so no duplicate files are uploaded!
+# this version on another datasets version, so no duplicate files are uploaded!
 clearml-data create --name coco128 --project YOLOv5
 clearml-data add --files .
 clearml-data close
@@ -157,7 +157,7 @@ clearml-data close
 Now that you have a ClearML dataset, you can very simply use it to train custom YOLOv5 🚀 models!
 
 ```bash
-python train.py --img 640 --batch 16 --epochs 3 --data clearml://YOUR_DATASET_ID --weights yolov5s.pt --cache
+python train.py --images 640 --batch 16 --epochs 3 --data clearml://YOUR_DATASET_ID --weights yolov5s.pt --cache
 ```
 
 <br>
@@ -221,7 +221,7 @@ if RANK in {-1, 0}:
     loggers = Loggers(save_dir, weights, opt, hyp, LOGGER)  # loggers instance
     if loggers.clearml:
         loggers.clearml.task.execute_remotely(queue="my_queue")  # <------ ADD THIS LINE
-        # Data_dict is either None if user did not choose for ClearML dataset or is filled in by ClearML
+        # Data_dict is either None if user did not choose for ClearML datasets or is filled in by ClearML
         data_dict = loggers.clearml.data_dict
 # ...
 ```

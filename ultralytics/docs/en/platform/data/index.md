@@ -1,6 +1,6 @@
 ---
 comments: true
-description: Learn about data management in Ultralytics Platform including dataset upload, annotation tools, and statistics visualization for YOLO model training.
+description: Learn about data management in Ultralytics Platform including datasets upload, annotation tools, and statistics visualization for YOLO model training.
 keywords: Ultralytics Platform, data management, datasets, annotation, YOLO, computer vision, data preparation, labeling
 ---
 
@@ -82,7 +82,7 @@ Ultralytics Platform uses Content-Addressable Storage (CAS) for efficient data m
 Reference datasets using the `ul://` URI format (see [Using Platform Datasets](../api/index.md#using-platform-datasets)):
 
 ```bash
-yolo train data=ul://username/datasets/my-dataset
+yolo train data=ul://username/datasets/my-datasets
 ```
 
 This allows training on the platform's datasets from any machine with your [API key](../account/api-keys.md) configured.

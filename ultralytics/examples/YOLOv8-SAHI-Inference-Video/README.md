@@ -35,13 +35,13 @@ Execute the script using the command line, specifying the path to your video fil
 
 ```bash
 # Run inference and save the output video with bounding boxes
-python yolov8_sahi.py --source "path/to/your/video.mp4" --save-img
+python yolov8_sahi.py --source "path/to/your/video.mp4" --save-images
 
 # Run inference using a specific YOLO11 model (e.g., yolo11n.pt) and save results
-python yolov8_sahi.py --source "path/to/your/video.mp4" --save-img --weights "yolo11n.pt"
+python yolov8_sahi.py --source "path/to/your/video.mp4" --save-images --weights "yolo11n.pt"
 
 # Run inference with smaller slices for potentially better small object detection
-python yolov8_sahi.py --source "path/to/your/video.mp4" --save-img --slice-height 512 --slice-width 512
+python yolov8_sahi.py --source "path/to/your/video.mp4" --save-images --slice-height 512 --slice-width 512
 ```
 
 This script processes the video frame by frame, applying SAHI's slicing and inference logic. When saving is enabled, it exports annotated frames to `runs/detect/predict`. Learn more about prediction with Ultralytics models in the [Predict mode documentation](https://docs.ultralytics.com/modes/predict/).

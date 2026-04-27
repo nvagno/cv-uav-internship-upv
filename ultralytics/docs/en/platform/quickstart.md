@@ -1,7 +1,7 @@
 ---
 comments: true
 description: Get started with Ultralytics Platform in minutes. Learn to create an account, upload datasets, train YOLO models, and deploy to production.
-keywords: Ultralytics Platform, Quickstart, YOLO models, dataset upload, model training, cloud deployment, machine learning
+keywords: Ultralytics Platform, Quickstart, YOLO models, datasets upload, model training, cloud deployment, machine learning
 ---
 
 # Ultralytics Platform Quickstart

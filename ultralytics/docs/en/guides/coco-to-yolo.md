@@ -1,7 +1,7 @@
 ---
 comments: true
 description: Learn how to convert COCO JSON annotations to YOLO format for object detection, instance segmentation, and pose estimation training. Complete guide with step-by-step examples, common pitfalls, and class ID mapping for custom datasets.
-keywords: COCO to YOLO, convert COCO JSON to YOLO, COCO JSON format, YOLO annotation format, convert_coco, COCO dataset training, train YOLO on COCO, object detection dataset, instance segmentation dataset, pose estimation dataset, dataset conversion, annotation format, cls91to80, category_id, bounding box format, YOLO training data
+keywords: COCO to YOLO, convert COCO JSON to YOLO, COCO JSON format, YOLO annotation format, convert_coco, COCO datasets training, train YOLO on COCO, object detection datasets, instance segmentation datasets, pose estimation datasets, datasets conversion, annotation format, cls91to80, category_id, bounding box format, YOLO training data
 ---
 
 # How to Convert COCO Annotations to YOLO Format
@@ -191,7 +191,7 @@ names = {cat["id"] - 1: cat["name"] for cat in categories}
 # NOTE: convert_coco maps class IDs as category_id - 1, so category_id must
 # start from 1. If your categories start from 0, add 1 to each ID first.
 
-# Create dataset.yaml
+# Create datasets.yaml
 dataset = {
     "path": str(Path("my_dataset").resolve()),
     "train": "images/train",
@@ -199,7 +199,7 @@ dataset = {
     "names": names,
 }
 
-with open("my_dataset/dataset.yaml", "w") as f:
+with open("my_dataset/datasets.yaml", "w") as f:
     yaml.dump(dataset, f, default_flow_style=False)
 ```
 

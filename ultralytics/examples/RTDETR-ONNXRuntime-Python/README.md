@@ -29,7 +29,7 @@ Once the dependencies are installed, you can run inference using the `main.py` s
 Execute the script from your terminal, specifying the path to your ONNX model, the input image, and optional confidence and IoU thresholds:
 
 ```bash
-python main.py --model rtdetr-l.onnx --img image.jpg --conf-thres 0.5 --iou-thres 0.5
+python main.py --model rtdetr-l.onnx --images image.jpg --conf-thres 0.5 --iou-thres 0.5
 ```
 
 **Arguments:**

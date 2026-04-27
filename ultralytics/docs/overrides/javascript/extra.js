@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ],
       searchExamples: [
         "YOLO26 quickstart",
-        "custom dataset training",
+        "custom datasets training",
         "model export formats",
         "object detection tutorial",
         "hyperparameter tuning",

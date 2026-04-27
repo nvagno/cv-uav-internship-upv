@@ -133,7 +133,7 @@ Follow these steps to run object counting in Ultralytics YOLO26:
 
 2. Execute the region counting script:
     ```bash
-    python yolov8_region_counter.py --source "path/to/video.mp4" --save-img
+    python yolov8_region_counter.py --source "path/to/video.mp4" --save-images
     ```
 
 For more options, visit the [Usage Examples](#usage-examples) section.

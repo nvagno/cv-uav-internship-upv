@@ -21,7 +21,7 @@ from ultralytics.utils.patches import imread
 
 
 class BaseDataset(Dataset):
-    """Base dataset class for loading and processing image data.
+    """Base datasets class for loading and processing image data.
 
     This class provides core functionality for loading images, caching, and preparing data for training and inference in
     object detection tasks.
@@ -32,13 +32,13 @@ class BaseDataset(Dataset):
         augment (bool): Whether to apply data augmentation.
         single_cls (bool): Whether to treat all objects as a single class.
         prefix (str): Prefix to print in log messages.
-        fraction (float): Fraction of dataset to utilize.
+        fraction (float): Fraction of datasets to utilize.
         channels (int): Number of channels in the images (1 for grayscale, 3 for color). Color images loaded with OpenCV
             are in BGR channel order.
         cv2_flag (int): OpenCV flag for reading images.
         im_files (list[str]): List of image file paths.
         labels (list[dict]): List of label data dictionaries.
-        ni (int): Number of images in the dataset.
+        ni (int): Number of images in the datasets.
         rect (bool): Whether to use rectangular training.
         batch_size (int): Size of batches.
         stride (int): Stride used in the model.
@@ -57,13 +57,13 @@ class BaseDataset(Dataset):
     Methods:
         get_img_files: Read image files from the specified path.
         update_labels: Update labels to include only specified classes.
-        load_image: Load an image from the dataset.
+        load_image: Load an image from the datasets.
         cache_images: Cache images to memory or disk.
         cache_images_to_disk: Save an image as an *.npy file for faster loading.
         check_cache_disk: Check image caching requirements vs available disk space.
         check_cache_ram: Check image caching requirements vs available memory.
         set_rectangle: Sort images by aspect ratio and set batch shapes for rectangular training.
-        get_image_and_label: Get and return label information from the dataset.
+        get_image_and_label: Get and return label information from the datasets.
         update_labels_info: Custom label format method to be implemented by subclasses.
         build_transforms: Build transformation pipeline to be implemented by subclasses.
         get_labels: Get labels method to be implemented by subclasses.
@@ -101,7 +101,7 @@ class BaseDataset(Dataset):
             pad (float): Padding value.
             single_cls (bool): If True, single class training is used.
             classes (list[int], optional): List of included classes.
-            fraction (float): Fraction of dataset to utilize.
+            fraction (float): Fraction of datasets to utilize.
             channels (int): Number of channels in the images (1 for grayscale, 3 for color). Color images loaded with
                 OpenCV are in BGR channel order.
         """
@@ -180,7 +180,7 @@ class BaseDataset(Dataset):
         except Exception as e:
             raise FileNotFoundError(f"{self.prefix}Error loading data from {img_path}\n{HELP_URL}") from e
         if self.fraction < 1:
-            im_files = im_files[: round(len(im_files) * self.fraction)]  # retain a fraction of the dataset
+            im_files = im_files[: round(len(im_files) * self.fraction)]  # retain a fraction of the datasets
         check_file_speeds(im_files, prefix=self.prefix)  # check image read speeds
         return im_files
 
@@ -208,7 +208,7 @@ class BaseDataset(Dataset):
                 self.labels[i]["cls"][:, 0] = 0
 
     def load_image(self, i: int, rect_mode: bool = True) -> tuple[np.ndarray, tuple[int, int], tuple[int, int]]:
-        """Load an image from dataset index 'i'.
+        """Load an image from datasets index 'i'.
 
         Args:
             i (int): Index of the image to load.
@@ -309,7 +309,7 @@ class BaseDataset(Dataset):
                 self.cache = None
                 LOGGER.warning(f"{self.prefix}Skipping caching images to disk, directory not writable")
                 return False
-        disk_required = b * self.ni / n * (1 + safety_margin)  # bytes required to cache dataset to disk
+        disk_required = b * self.ni / n * (1 + safety_margin)  # bytes required to cache datasets to disk
         total, _used, free = shutil.disk_usage(Path(self.im_files[0]).parent)
         if disk_required > free:
             self.cache = None
@@ -338,7 +338,7 @@ class BaseDataset(Dataset):
                 continue
             ratio = self.imgsz / max(im.shape[0], im.shape[1])  # max(h, w)  # ratio
             b += im.nbytes * ratio**2
-        mem_required = b * self.ni / n * (1 + safety_margin)  # GB required to cache dataset into RAM
+        mem_required = b * self.ni / n * (1 + safety_margin)  # GB required to cache datasets into RAM
         mem = __import__("psutil").virtual_memory()
         if mem_required > mem.available:
             self.cache = None
@@ -380,7 +380,7 @@ class BaseDataset(Dataset):
         return self.transforms(self.get_image_and_label(index))
 
     def get_image_and_label(self, index: int) -> dict[str, Any]:
-        """Get and return label information from the dataset.
+        """Get and return label information from the datasets.
 
         Args:
             index (int): Index of the image to retrieve.
@@ -390,7 +390,7 @@ class BaseDataset(Dataset):
         """
         label = deepcopy(self.labels[index])  # requires deepcopy() https://github.com/ultralytics/ultralytics/pull/1948
         label.pop("shape", None)  # shape is for rect, remove it
-        label["img"], label["ori_shape"], label["resized_shape"] = self.load_image(index)
+        label["images"], label["ori_shape"], label["resized_shape"] = self.load_image(index)
         label["ratio_pad"] = (
             label["resized_shape"][0] / label["ori_shape"][0],
             label["resized_shape"][1] / label["ori_shape"][1],
@@ -400,7 +400,7 @@ class BaseDataset(Dataset):
         return self.update_labels_info(label)
 
     def __len__(self) -> int:
-        """Return the length of the labels list for the dataset."""
+        """Return the length of the labels list for the datasets."""
         return len(self.labels)
 
     def update_labels_info(self, label: dict[str, Any]) -> dict[str, Any]:

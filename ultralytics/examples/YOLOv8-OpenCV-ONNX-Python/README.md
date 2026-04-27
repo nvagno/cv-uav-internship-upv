@@ -24,7 +24,7 @@ Follow these simple steps to get the example running on your local machine.
 3.  **Run the Detection Script:**
     Execute the main Python script, specifying the ONNX model path and the input image.
     ```bash
-    python main.py --model yolov8n.onnx --img image.jpg
+    python main.py --model yolov8n.onnx --images image.jpg
     ```
     The script will perform object detection on `image.jpg` using the `yolov8n.onnx` model and display the results.
 

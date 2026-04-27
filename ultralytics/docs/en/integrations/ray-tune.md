@@ -277,7 +277,7 @@ To tune the hyperparameters of your Ultralytics YOLO26 model using Ray Tune, fol
     # Load a YOLO26 model
     model = YOLO("yolo26n.pt")
 
-    # Start tuning with the COCO8 dataset
+    # Start tuning with the COCO8 datasets
     result_grid = model.tune(data="coco8.yaml", use_ray=True)
     ```
 

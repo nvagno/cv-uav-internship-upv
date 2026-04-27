@@ -1,7 +1,7 @@
 ---
 comments: true
-description: Train Ultralytics YOLO directly on COCO JSON annotations without converting to YOLO format. Custom dataset and trainer example with complete working code for detection training.
-keywords: COCO JSON training, train YOLO on COCO JSON, COCO JSON without conversion, custom YOLO dataset, custom YOLO trainer, COCO annotations YOLO, direct COCO training, Ultralytics YOLO, object detection training, YOLODataset subclass, COCO format training, skip annotation conversion
+description: Train Ultralytics YOLO directly on COCO JSON annotations without converting to YOLO format. Custom datasets and trainer example with complete working code for detection training.
+keywords: COCO JSON training, train YOLO on COCO JSON, COCO JSON without conversion, custom YOLO datasets, custom YOLO trainer, COCO annotations YOLO, direct COCO training, Ultralytics YOLO, object detection training, YOLODataset subclass, COCO format training, skip annotation conversion
 ---
 
 # How to Train YOLO on COCO JSON Without Converting
@@ -203,7 +203,7 @@ With the dataset class, trainer class, and YAML config in place, training works 
 from ultralytics import YOLO
 
 model = YOLO("yolo26n.pt")
-model.train(data="dataset.yaml", epochs=100, imgsz=640, trainer=COCOTrainer)
+model.train(data="datasets.yaml", epochs=100, imgsz=640, trainer=COCOTrainer)
 ```
 
 The full [training](../modes/train.md) pipeline runs as expected, including [validation](../modes/val.md), checkpoint saving, and metric logging.
@@ -323,7 +323,7 @@ class COCOTrainer(DetectionTrainer):
 
 
 model = YOLO("yolo26n.pt")
-model.train(data="dataset.yaml", epochs=100, imgsz=640, trainer=COCOTrainer)
+model.train(data="datasets.yaml", epochs=100, imgsz=640, trainer=COCOTrainer)
 ```
 
 For [hyperparameter](https://www.ultralytics.com/glossary/hyperparameter-tuning) recommendations, see the [Model Training Tips](model-training-tips.md) guide.

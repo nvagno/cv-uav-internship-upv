@@ -962,7 +962,7 @@ class Exporter:
         # Export to TF
         images = None
         if self.args.int8 and self.args.data:
-            images = [batch["img"] for batch in self.get_int8_calibration_dataloader(prefix)]
+            images = [batch["images"] for batch in self.get_int8_calibration_dataloader(prefix)]
             images = (
                 torch.nn.functional.interpolate(torch.cat(images, 0).float(), size=self.imgsz)
                 .permute(0, 2, 3, 1)
@@ -1164,7 +1164,7 @@ class Exporter:
     @staticmethod
     def _transform_fn(data_item) -> np.ndarray:
         """The transformation function for Axelera/OpenVINO quantization preprocessing."""
-        data_item: torch.Tensor = data_item["img"] if isinstance(data_item, dict) else data_item
+        data_item: torch.Tensor = data_item["images"] if isinstance(data_item, dict) else data_item
         assert data_item.dtype == torch.uint8, "Input image must be uint8 for the quantization preprocessing"
         im = data_item.numpy().astype(np.float32) / 255.0  # uint8 to fp16/32 and 0 - 255 to 0.0 - 1.0
         return im[None] if im.ndim == 3 else im

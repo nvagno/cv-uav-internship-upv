@@ -59,7 +59,7 @@ class SegmentationPredictor(DetectionPredictor):
 
         Examples:
             >>> predictor = SegmentationPredictor(overrides=dict(model="yolo26n-seg.pt"))
-            >>> results = predictor.postprocess(preds, img, orig_img)
+            >>> results = predictor.postprocess(preds, images, orig_img)
         """
         # Extract protos - tuple if PyTorch model or array if exported
         protos = preds[0][1] if isinstance(preds[0], tuple) else preds[1]
