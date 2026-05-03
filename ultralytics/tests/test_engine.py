@@ -177,7 +177,7 @@ def test_train_reuses_loaded_checkpoint_model(monkeypatch):
             self.callbacks = _callbacks
             self.model = None
             self.validator = SimpleNamespace(metrics=None)
-            self.best = MODEL.parent / "nonexistent-best.pt"
+            self.best = MODEL.parent / "nonexistent-best-model.pt"
             self.last = MODEL
             captured["trainer"] = self
 

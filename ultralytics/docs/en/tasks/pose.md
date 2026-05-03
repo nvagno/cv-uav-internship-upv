@@ -235,7 +235,7 @@ from ultralytics import YOLO
 
 # Load a model
 model = YOLO("yolo26n-pose.pt")  # load an official model
-model = YOLO("path/to/best.pt")  # load a custom model
+model = YOLO("path/to/best-model.pt")  # load a custom model
 
 # Validate the model
 metrics = model.val()  # no arguments needed, datasets and settings remembered
@@ -252,7 +252,7 @@ from ultralytics import YOLO
 
 # Load a model
 model = YOLO("yolo26n-pose.pt")  # load an official model
-model = YOLO("path/to/best.pt")  # load a custom-trained model
+model = YOLO("path/to/best-model.pt")  # load a custom-trained model
 
 # Export the model
 model.export(format="onnx")
