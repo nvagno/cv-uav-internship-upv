@@ -6,3 +6,4 @@ geopandas
 openpyxl
 torch
 rasterio
+ultralytics
